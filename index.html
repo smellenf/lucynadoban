@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lucy Nadoban</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Lucy Nadoban, singer-songwriter from Brooklyn, NY. Original songs, performances and training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow column like a lyric sheet; songs set as a wide grid of "tracks"; performance history as a dated log. */
+:root {
+  color-scheme: dark;   /* single committed look: black stage */
+  --bg: #000000;
+  --surface: #0F1112;
+  --ink: #EEF1F1;
+  --muted: #98A3A6;
+  --rule: #262C2E;
+  --accent: #82C6CF;    /* tide blue */
+  --mark: #D89CC3;      /* plum, used sparingly */
+  --tile: #14191B;
+  --font-display: "Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --step--1: 0.8125rem; --step-0: 1.0625rem; --step-1: 1.3rem; --step-2: 1.75rem; --step-3: 2.6rem; --step-4: clamp(3rem, 11vw, 6.5rem);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+.narrow { max-width: 40rem; }
+
+/* nav */
+nav.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; padding-block: 20px 0; font-family: var(--font-mono); font-size: var(--step--1); }
+nav.top .who { color: var(--muted); }
+nav.top ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+nav.top a { color: var(--ink); text-decoration: none; }
+nav.top a:hover { color: var(--accent); }
+
+/* hero */
+header.hero { padding-block: clamp(40px, 8vw, 88px) 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 40px; align-items: end; }
+.hero-text { display: grid; gap: 20px; min-width: 0; }
+@media (max-width: 760px) { header.hero { grid-template-columns: 1fr; gap: 28px; } .portrait { max-width: 300px; } }
+.portrait { position: relative; display: block; aspect-ratio: 3 / 4; width: 100%; max-width: 100%; background: var(--tile); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; color: var(--ink); text-decoration: none; }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; transition: transform .4s ease, filter .4s ease; }
+.portrait:hover img { transform: scale(1.03); }
+.portrait .ph { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px; font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); border: 1px dashed var(--rule); margin: 12px; }
+.portrait.has-photo .ph { display: none; }
+.portrait .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 12px; background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,0)); font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: .06em; text-transform: uppercase; color: #EEF1F1; display: flex; justify-content: space-between; gap: 8px; }
+.portrait .cap span:last-child { color: var(--accent); }
+.hero h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--step-4); line-height: 0.9; letter-spacing: -0.035em; margin: 0; text-wrap: balance; }
+.hero h1 span { display: block; color: var(--accent); }
+.hero .role { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; }
+.hero .role b { color: var(--mark); font-weight: 500; }
+.hero .lede { font-size: var(--step-1); line-height: 1.45; max-width: 34rem; margin: 0; }
+
+section { padding-block: 48px; border-top: 1px solid var(--rule); }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-2); letter-spacing: -0.01em; margin: 0 0 6px; }
+.kicker { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); margin: 0 0 28px; }
+
+/* featured */
+.feature { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: end; }
+@media (max-width: 760px) { .feature { grid-template-columns: 1fr; } }
+.feature h3 { font-family: var(--font-display); font-size: var(--step-3); line-height: 1; margin: 0 0 10px; letter-spacing: -0.02em; }
+.feature p { margin: 0 0 8px; }
+
+/* video player tile */
+.player { position: relative; display: block; aspect-ratio: 16 / 9; max-width: 100%; width: 100%; background: var(--tile); border-radius: 4px; overflow: hidden; color: var(--ink); text-decoration: none; }
+.player img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.player .fallback { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 14px 16px; }
+.player .fallback .wave { height: 38%; display: flex; align-items: center; gap: 3px; }
+.player .fallback .wave i { flex: 1; background: var(--accent); opacity: .35; border-radius: 2px; }
+.player .fallback .t { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); line-height: 1.15; }
+.player .play { position: absolute; right: 12px; bottom: 12px; width: 48px; height: 48px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; transition: transform .15s; }
+.player .play::after { content: ""; border-left: 14px solid var(--bg); border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
+.player:hover .play { transform: scale(1.08); }
+.player.has-thumb .fallback { display: none; }
+.dur { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); }
+
+/* songs grid */
+.tracks { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 36px 28px; }
+.track { display: grid; gap: 10px; min-width: 0; }
+.track h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); margin: 0; line-height: 1.2; }
+.track .meta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.track .meta .orig { color: var(--mark); }
+.track p { margin: 0; font-size: 0.97rem; }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+.about p { margin: 0 0 14px; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.facts li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+@media (max-width: 420px) { .facts li { grid-template-columns: 1fr; gap: 2px; } }
+.facts .k { font-family: var(--font-mono); font-size: var(--step--1); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-top: 3px; }
+
+/* teachers */
+.teachers { margin-top: 40px; }
+.teachers h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); margin: 0 0 16px; }
+.teachers dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 20px 32px; }
+.teachers dl > div { min-width: 0; border-top: 1px solid var(--rule); padding-top: 12px; }
+.teachers dt { font-family: var(--font-mono); font-size: var(--step--1); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 4px; }
+.teachers dd { margin: 0; }
+.more { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; margin-top: 28px; }
+.more p { margin: 0; color: var(--muted); }
+.btn { display: inline-block; font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: var(--bg); background: var(--accent); padding: 12px 18px; border-radius: 3px; }
+.btn:hover { background: var(--ink); }
+
+/* performance log */
+.log { list-style: none; margin: 0; padding: 0; }
+.log li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 16px; padding-block: 12px; border-bottom: 1px solid var(--rule); }
+@media (max-width: 480px) { .log li { grid-template-columns: 1fr; gap: 0; } }
+.log time { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.log .w { font-weight: 600; }
+.log .v { color: var(--muted); }
+.log .tag { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--mark); margin-left: 6px; }
+
+/* contact */
+.contact p { margin: 0 0 10px; }
+.addr { font-family: var(--font-mono); font-size: var(--step-0); background: var(--surface); border: 1px solid var(--rule); padding: 10px 14px; border-radius: 4px; display: inline-block; user-select: all; overflow-wrap: anywhere; }
+.todo { background: color-mix(in srgb, var(--mark) 14%, transparent); color: var(--ink); padding: 0 4px; border-radius: 2px; }
+footer { padding-block: 32px 48px; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="top" aria-label="Sections">
+    <span class="who">Lucy Nadoban</span>
+    <ul>
+      <li><a href="#songs">Songs</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#performances">Performances</a></li>
+      <li><a href="Lucy-Nadoban-Music-Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Lucy <span>Nadoban</span></h1>
+      <p class="role"><b>Singer-songwriter</b><span>Brooklyn, NY</span><span>LaGuardia High School, Class of 2027</span></p>
+      <p class="lede">Lucy writes songs at the piano and guitar and performs them herself. She spent four years in the Brooklyn Youth Chorus Concert Ensemble. These are live recordings from 2025 and 2026.</p>
+    </div>
+    <!-- Photo: lucy-portrait.jpg (3:4 portrait) sits next to this file. -->
+    <a class="portrait" id="portrait" href="https://www.youtube.com/@slinkus" target="_blank" rel="noopener" aria-label="Lucy Nadoban on YouTube">
+      <span class="ph">Portrait photo<br>3:4, lucy-portrait.jpg</span>
+      <span class="cap"><span>Watch on YouTube</span><span>→</span></span>
+    </a>
+  </header>
+
+  <section id="featured" aria-labelledby="f-h">
+    <div class="feature">
+      <div class="player-slot" data-id="jySKQ4HLYGk" data-title="Long Beach"></div>
+      <div>
+        <p class="kicker" id="f-h">Featured · UCLA Summer Songwriting Intensive, July 2026</p>
+        <h3>Long Beach</h3>
+        <p>Original song, written and performed at the UCLA Herb Alpert School of Music showcase.</p>
+        <p class="dur">4:45</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="songs" aria-labelledby="songs-h">
+    <h2 id="songs-h">Songs</h2>
+    <p class="kicker">Live performances, newest first</p>
+    <div class="tracks" id="tracks"></div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="about">
+      <div class="narrow">
+        <h2 id="about-h">About</h2>
+        <p><span class="todo">[Draft, for Lucy to rewrite in her own words.]</span> Lucy Nadoban is a senior at Fiorello H. LaGuardia High School of Music &amp; Art and Performing Arts, where she sings in the Senior Chorus and writes for the New Music Ensemble. Her original songs “Dead to Me,” “Ms. Snow” and “Black Tides” premiered at the ensemble’s showcases in 2025 and 2026.</p>
+        <p>From 2022 to 2026 she sang in the Brooklyn Youth Chorus Concert Ensemble, performing at Carnegie Hall, Radio City Music Hall, David Geffen Hall and the Tokyo Dome. In summer 2026 she studied songwriting at Idyllwild Arts and at UCLA’s Herb Alpert School of Music.</p>
+        <p>She also writes and plays in Coreadon, an original rock duo.</p>
+      </div>
+      <ul class="facts">
+        <li><span class="k">School</span><span>LaGuardia High School of Music &amp; Art and Performing Arts, Class of 2027</span></li>
+        <li><span class="k">Voice &amp; instruments</span><span>Voice, piano, guitar</span></li>
+        <li><span class="k">Summer 2026</span><span>Idyllwild Arts Summer Songwriting Intensive<br>UCLA Herb Alpert School of Music Summer Songwriting Intensive</span></li>
+        <li><span class="k">Ensembles</span><span>Brooklyn Youth Chorus Concert Ensemble (2022–2026)<br>LaGuardia Senior Chorus, New Music Ensemble, Cantare<br>Coreadon, original rock duo</span></li>
+        <li><span class="k">Work</span><span>Event and Social Media Coordinator, 7eventytwo at Church Street School for Music &amp; Art (2026–present)</span></li>
+      </ul>
+    </div>
+    <div class="teachers">
+      <h3>Teachers</h3>
+      <dl>
+        <div><dt>Voice</dt><dd>Katie Agresta · Victor Clark · Darija Hreljanović · Maryanne Swerdfeger · Debbie Dean · Flora Kirou · Michelle Rosen</dd></div>
+        <div><dt>Songwriting &amp; performance</dt><dd>Robert Apostle</dd></div>
+        <div><dt>Theory &amp; sight singing</dt><dd>Victor Clark · Jonah Piali</dd></div>
+        <div><dt>Piano</dt><dd>Debbie Dean · Borah Han · Kris Davis</dd></div>
+        <div><dt>Music production</dt><dd>Justin Carroll · 343 Labs</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="performances" aria-labelledby="perf-h">
+    <h2 id="perf-h">Selected performances</h2>
+    <p class="kicker">A selection, 2022–2026</p>
+    <ul class="log">
+      <li><time datetime="2026-07">Jul 2026</time><div><span class="w">UCLA Summer Songwriting showcase</span><span class="tag">original</span><br><span class="v">Herb Alpert School of Music, Los Angeles</span></div></li>
+      <li><time datetime="2026-07">Jul 2026</time><div><span class="w">Idyllwild Songwriters Finale</span><span class="tag">original</span><br><span class="v">Idyllwild Arts, Idyllwild, CA</span></div></li>
+      <li><time datetime="2026-06-25">Jun 2026</time><div><span class="w">New Music Show, “Black Tides”</span><span class="tag">original</span><br><span class="v">LaGuardia High School, New York</span></div></li>
+      <li><time datetime="2026-06-19">Jun 2026</time><div><span class="w"><i>Conversations with P</i>, vocalist</span><br><span class="v">Seven-chapter dance and music play · Triskelion Arts, Brooklyn</span></div></li>
+      <li><time datetime="2026-06">Jun 2026</time><div><span class="w">National Sawdust</span><br><span class="v">Brooklyn Youth Chorus · Brooklyn</span></div></li>
+      <li><time datetime="2026-04-15">Apr 2026</time><div><span class="w">New Music Show, “Ms. Snow”</span><span class="tag">original</span><br><span class="v">LaGuardia High School, New York</span></div></li>
+      <li><time datetime="2025-12-22">Dec 2025</time><div><span class="w">Winter Showcase, “Dead to Me”</span><span class="tag">original</span><br><span class="v">LaGuardia High School, New York</span></div></li>
+      <li><time datetime="2025-07">Jul 2025</time><div><span class="w">Studio Ghibli Film Concert: Final Tour</span><br><span class="v">Brooklyn Youth Chorus · Tokyo Dome, Tokyo</span></div></li>
+      <li><time datetime="2025-05">May 2025</time><div><span class="w"><i>Port(al)</i> by Paola Prestini, duet and choir</span><br><span class="v">Brooklyn Youth Chorus · Brooklyn Navy Yard</span></div></li>
+      <li><time datetime="2025-05-17">May 2025</time><div><span class="w">Spring Sings, soloist</span><br><span class="v">Brooklyn Youth Chorus · The Theater at City Tech, Brooklyn</span></div></li>
+      <li><time datetime="2025-03">Mar 2025</time><div><span class="w"><i>Lord of the Rings in Concert</i> trilogy (2023–2025)</span><br><span class="v">Brooklyn Youth Chorus · Radio City Music Hall</span></div></li>
+      <li><time datetime="2025-02-20">Feb 2025</time><div><span class="w">With Aoife O’Donovan and The Knights</span><br><span class="v">Brooklyn Youth Chorus · Carnegie Hall</span></div></li>
+      <li><time datetime="2025-01-29">Jan 2025</time><div><span class="w">Bernstein, Symphony No. 3 “Kaddish”</span><br><span class="v">Brooklyn Youth Chorus · Carnegie Hall</span></div></li>
+      <li><time datetime="2024-12-18">Dec 2024</time><div><span class="w"><i>Live with Kelly and Mark</i>, “Miracle on 67th Street”</span><br><span class="v">Brooklyn Youth Chorus · ABC Studios, New York</span></div></li>
+      <li><time datetime="2024-12-03">Dec 2024</time><div><span class="w">Philip Glass, <i>Powaqqatsi</i> film score</span><br><span class="v">Brooklyn Youth Chorus · The Town Hall, New York</span></div></li>
+      <li><time datetime="2024-10-10">Oct 2024</time><div><span class="w">Natalia Lafourcade with the LA Philharmonic, cond. Gustavo Dudamel</span><br><span class="v">Brooklyn Youth Chorus · Carnegie Hall</span></div></li>
+      <li><time datetime="2024-09-21">Sep 2024</time><div><span class="w">International Day of Peace, featured student speaker</span><br><span class="v">Brooklyn Youth Chorus · United Nations, New York</span></div></li>
+      <li><time datetime="2024-07">Jul 2024</time><div><span class="w">Joe Hisaishi Symphonic Concert: Studio Ghibli Films</span><br><span class="v">Brooklyn Youth Chorus · Madison Square Garden</span></div></li>
+      <li><time datetime="2024-04">Apr 2024</time><div><span class="w">New York Philharmonic, Olga Neuwirth, <i>Keyframes for a Hippogriff</i></span><br><span class="v">Brooklyn Youth Chorus · David Geffen Hall</span></div></li>
+      <li><time datetime="2023-09-22">Sep 2023</time><div><span class="w">With Aoife O’Donovan, FreshGrass Festival</span><br><span class="v">Brooklyn Youth Chorus · MASS MoCA, North Adams, MA</span></div></li>
+      <li><time datetime="2023-03">Mar 2023</time><div><span class="w">Bach, <i>St. Matthew Passion</i></span><br><span class="v">Brooklyn Youth Chorus · David Geffen Hall, Lincoln Center</span></div></li>
+      <li><time datetime="2022-12-14">Dec 2022</time><div><span class="w"><i>Everlasting Light!</i> with Anthony Roth Costanzo</span><br><span class="v">Brooklyn Youth Chorus · Temple Emanu-El, New York</span></div></li>
+      <li><time datetime="2022-10-29">Oct 2022</time><div><span class="w">David Geffen Hall Reopening, NY Philharmonic Day of Music</span><br><span class="v">Brooklyn Youth Chorus · Lincoln Center</span></div></li>
+    </ul>
+    <div class="more">
+      <p>More performances, ensembles and training are listed in her full music résumé.</p>
+      <a class="btn" href="Lucy-Nadoban-Music-Resume.pdf" target="_blank" rel="noopener">Music résumé (PDF)</a>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="c-h">
+    <h2 id="c-h">Contact</h2>
+    <p>For admissions, faculty and booking:</p>
+    <p class="addr">lucynadoban@gmail.com</p>
+    <p><a href="Lucy-Nadoban-Music-Resume.pdf" target="_blank" rel="noopener">Music résumé (PDF)</a></p>
+  </section>
+
+  <footer>© 2026 Lucy Nadoban. All songs written by Lucy Nadoban unless noted.</footer>
+</div>
+
+<script>
+(function () {
+  var SONGS = [
+    { id: "jySKQ4HLYGk", title: "Long Beach", orig: true, when: "Jul 2026", dur: "4:45", where: "UCLA Summer Songwriting showcase", note: "" },
+    { id: "VCtYTbLOI_g", title: "This Is the Place", orig: true, when: "Jul 2026", dur: "4:56", where: "Idyllwild Arts", note: "With Tali." },
+    { id: "kSVpSI1kHAk", title: "Idyllwild Songwriters Finale", orig: false, when: "Jul 2026", dur: "3:40", where: "Idyllwild Arts", note: "Closing showcase of the summer songwriting intensive." },
+    { id: "gzf5K7W9BDk", title: "Black Tides", orig: true, when: "Jun 25, 2026", dur: "4:59", where: "LaGuardia New Music Show", note: "With Paloma Toll." },
+    { id: "5LzFN0cjxBU", title: "Ms. Snow", orig: true, when: "Apr 15, 2026", dur: "3:39", where: "LaGuardia New Music Show", note: "" },
+    { id: "clns1mAsnAc", title: "Dead to Me", orig: true, when: "Dec 2025", dur: "4:17", where: "LaGuardia Winter Showcase", note: "" },
+    { id: "GMkQdkFcyxg", title: "When in Rome", orig: true, when: "2026", dur: "4:51", where: "", note: "" }
+  ];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function player(id, title) {
+    var a = document.createElement("a");
+    a.className = "player";
+    a.href = "https://www.youtube.com/watch?v=" + id;
+    a.target = "_blank"; a.rel = "noopener";
+    a.setAttribute("aria-label", "Play " + title);
+    var bars = "";
+    for (var i = 0; i < 28; i++) { var h = 25 + Math.round(70 * Math.abs(Math.sin(i * 0.9 + id.charCodeAt(i % id.length)))); bars += '<i style="height:' + h + '%"></i>'; }
+    a.innerHTML = '<div class="fallback"><div class="wave" aria-hidden="true">' + bars + '</div><div class="t">' + esc(title) + '</div></div><span class="play" aria-hidden="true"></span>';
+    // Thumbnail saved with the site (thumbs/ID.jpg); falls back to YouTube's copy.
+    var img = new Image();
+    img.alt = "";
+    img.onload = function () { a.insertBefore(img, a.firstChild); a.classList.add("has-thumb"); };
+    img.onerror = function () { img.onerror = null; img.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"; };
+    img.src = "thumbs/" + id + ".jpg";
+    // Where YouTube is reachable (a normal website), play inline instead of leaving the page.
+    var probe = new Image();
+    probe.onload = function () {
+      if (probe.naturalWidth <= 120) return;
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var wrap = document.createElement("div"); wrap.className = "player";
+        var f = document.createElement("iframe");
+        f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+        f.title = title; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+        wrap.appendChild(f);
+        a.replaceWith(wrap);
+      }, { once: true });
+    };
+    probe.src = "https://i.ytimg.com/vi/" + id + "/mqdefault.jpg";
+    return a;
+  }
+
+  (function () {
+    var p = document.getElementById("portrait");
+    var img = new Image();
+    img.alt = "Lucy Nadoban";
+    img.onload = function () { p.insertBefore(img, p.firstChild); p.classList.add("has-photo"); };
+    img.src = "lucy-portrait.jpg";
+  })();
+
+  document.querySelectorAll(".player-slot").forEach(function (slot) {
+    slot.replaceWith(player(slot.dataset.id, slot.dataset.title));
+  });
+
+  var grid = document.getElementById("tracks");
+  SONGS.forEach(function (s) {
+    var el = document.createElement("article");
+    el.className = "track";
+    el.appendChild(player(s.id, s.title));
+    var meta = '<div class="meta">' + (s.orig ? '<span class="orig">Original</span>' : '') + '<span>' + esc(s.when) + '</span><span>' + esc(s.dur) + '</span></div>';
+    el.insertAdjacentHTML("beforeend", '<h3>' + esc(s.title) + '</h3>' + meta + (s.where || s.note ? '<p>' + esc([s.where, s.note].filter(Boolean).join(". ")) + '</p>' : ''));
+    grid.appendChild(el);
+  });
+})();
+</script>
+
+</body>
+</html>
