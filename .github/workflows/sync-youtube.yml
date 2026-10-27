@@ -16,22 +16,22 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install --quiet pillow
       - name: Sync
         id: sync
         run: |
-          python .github/scripts/sync_youtube.py | tee sync.log
+          python .github/scripts/sync_youtube.py | tee "$RUNNER_TEMP/sync.log"
       - name: Commit changes
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
+          if [ -n "$(git status --porcelain -- index.html thumbs)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add -A index.html thumbs
-            git commit -m "Sync songs from YouTube" -m "$(cat sync.log)"
+            git commit -m "Sync songs from YouTube" -m "$(cat "$RUNNER_TEMP/sync.log")"
             git push
           else
             echo "Nothing to commit."
