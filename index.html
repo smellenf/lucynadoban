@@ -99,6 +99,7 @@ h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-2
 .track h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); margin: 0; line-height: 1.2; }
 .track .meta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 14px; }
 .track .meta .orig { color: var(--mark); }
+.track .meta .band { color: var(--accent); }
 .track p { margin: 0; font-size: 0.97rem; }
 
 /* about */
@@ -209,7 +210,7 @@ footer { padding-block: 32px 48px; border-top: 1px solid var(--rule); font-famil
     <ul class="log">
       <li><time datetime="2026-07">Jul 2026</time><div><span class="w">UCLA Summer Songwriting showcase</span><span class="tag">original</span><br><span class="v">Herb Alpert School of Music, Los Angeles</span></div></li>
       <li><time datetime="2026-07">Jul 2026</time><div><span class="w">Idyllwild Songwriters Finale</span><span class="tag">original</span><br><span class="v">Idyllwild Arts, Idyllwild, CA</span></div></li>
-      <li><time datetime="2026-06-25">Jun 2026</time><div><span class="w">New Music Show, “Black Tides,” co-written with Paloma Toll</span><span class="tag">original</span><br><span class="v">LaGuardia High School, New York</span></div></li>
+      <li><time datetime="2026-06-25">Jun 2026</time><div><span class="w">New Music Show, “Black Tides,” co-written and performed with Paloma Toll</span><span class="tag">original</span><span class="tag">Coreadon</span><br><span class="v">LaGuardia High School, New York</span></div></li>
       <li><time datetime="2026-06-19">Jun 2026</time><div><span class="w"><i>Conversations with P</i>, vocalist</span><br><span class="v">Seven-chapter dance and music play · Triskelion Arts, Brooklyn</span></div></li>
       <li><time datetime="2026-06">Jun 2026</time><div><span class="w">National Sawdust</span><br><span class="v">Brooklyn Youth Chorus · Brooklyn</span></div></li>
       <li><time datetime="2026-04-15">Apr 2026</time><div><span class="w">New Music Show, “Ms. Snow”</span><span class="tag">original</span><br><span class="v">LaGuardia High School, New York</span></div></li>
@@ -253,12 +254,12 @@ footer { padding-block: 32px 48px; border-top: 1px solid var(--rule); font-famil
   var SONGS = [
     {"id": "Pdgw2b1_ErM", "title": "Blue", "orig": true, "when": "Oct 25, 2026", "dur": "4:21", "where": "", "note": ""},
     {"id": "gMfoo852cm8", "title": "My Good Old Ways", "orig": true, "when": "Oct 25, 2026", "dur": "3:46", "where": "", "note": ""},
-    {"id": "0peTbsRgNqo", "title": "Shoot Me", "orig": true, "when": "", "dur": "2:43", "where": "Recorded at Dubway Studios, New York", "note": "Co-written and performed with Paloma Toll."},
-    {"id": "PaaBiatKudk", "title": "Some Misty Morning", "orig": true, "when": "", "dur": "5:10", "where": "Recorded at Dubway Studios, New York", "note": "Co-written and performed with Paloma Toll."},
+    {"id": "0peTbsRgNqo", "title": "Shoot Me", "orig": true, "when": "", "dur": "2:43", "where": "Recorded at Dubway Studios, New York", "note": "Co-written and performed with Paloma Toll.", "band": "Coreadon"},
+    {"id": "PaaBiatKudk", "title": "Some Misty Morning", "orig": true, "when": "", "dur": "5:10", "where": "Recorded at Dubway Studios, New York", "note": "Co-written and performed with Paloma Toll.", "band": "Coreadon"},
     {"id": "jySKQ4HLYGk", "title": "Long Beach", "orig": true, "when": "Jul 2026", "dur": "4:45", "where": "UCLA Summer Songwriting showcase", "note": ""},
     {"id": "VCtYTbLOI_g", "title": "This Is the Place", "orig": true, "when": "Jul 2026", "dur": "4:56", "where": "Idyllwild Arts", "note": "Co-written and performed with Tali Walpole."},
     {"id": "kSVpSI1kHAk", "title": "Idyllwild Songwriters Finale", "orig": false, "when": "Jul 2026", "dur": "3:40", "where": "Idyllwild Arts", "note": "Closing showcase of the summer songwriting intensive."},
-    {"id": "gzf5K7W9BDk", "title": "Black Tides", "orig": true, "when": "Jun 25, 2026", "dur": "4:59", "where": "LaGuardia New Music Show", "note": "Co-written and performed with Paloma Toll."},
+    {"id": "gzf5K7W9BDk", "title": "Black Tides", "orig": true, "when": "Jun 25, 2026", "dur": "4:59", "where": "LaGuardia New Music Show", "note": "Co-written and performed with Paloma Toll.", "band": "Coreadon"},
     {"id": "5LzFN0cjxBU", "title": "Ms. Snow", "orig": true, "when": "Apr 15, 2026", "dur": "3:39", "where": "LaGuardia New Music Show", "note": ""},
     {"id": "clns1mAsnAc", "title": "Dead to Me", "orig": true, "when": "Dec 2025", "dur": "4:17", "where": "LaGuardia Winter Showcase", "note": ""}
   ];
@@ -316,7 +317,7 @@ footer { padding-block: 32px 48px; border-top: 1px solid var(--rule); font-famil
     var el = document.createElement("article");
     el.className = "track";
     el.appendChild(player(s.id, s.title));
-    var meta = '<div class="meta">' + (s.orig ? '<span class="orig">Original</span>' : '') + (s.when ? '<span>' + esc(s.when) + '</span>' : '') + (s.dur ? '<span>' + esc(s.dur) + '</span>' : '') + '</div>';
+    var meta = '<div class="meta">' + (s.orig ? '<span class="orig">Original</span>' : '') + (s.band ? '<span class="band">' + esc(s.band) + '</span>' : '') + (s.when ? '<span>' + esc(s.when) + '</span>' : '') + (s.dur ? '<span>' + esc(s.dur) + '</span>' : '') + '</div>';
     el.insertAdjacentHTML("beforeend", '<h3>' + esc(s.title) + '</h3>' + meta + (s.where || s.note ? '<p>' + esc([s.where, s.note].filter(Boolean).join(". ")) + '</p>' : ''));
     grid.appendChild(el);
   });
