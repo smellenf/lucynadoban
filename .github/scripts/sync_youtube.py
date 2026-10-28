@@ -55,7 +55,7 @@ def parse_title(raw, published):
         p = DATE_RX.sub("", p).strip(" ,")  # dates in titles are dropped; upload date is used
         if p:
             where.append(p)
-    return {
+    entry = {
         "title": title,
         "orig": False,
         "when": when,
@@ -63,6 +63,14 @@ def parse_title(raw, published):
         "where": " · ".join(where),
         "note": ("With " + " and ".join(others) + ".") if others else "",
     }
+    # Songs with Paloma Toll are Coreadon songs, co-written by the two of them.
+    if any(re.search(r"\bpaloma\b", o, re.I) for o in others):
+        rest_names = [o for o in others if not re.search(r"\bpaloma\b", o, re.I)]
+        entry["orig"] = True
+        entry["band"] = "Coreadon"
+        entry["note"] = "Co-written and performed with Paloma Toll." + (
+            " With " + " and ".join(rest_names) + "." if rest_names else "")
+    return entry
 
 
 def duration(video_id):
